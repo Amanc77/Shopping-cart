@@ -6,10 +6,10 @@ import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="bg-zinc-300 h-screen w-full flex">
+    <div className="bg-zinc-300 h-full w-full flex">
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/Details" element={<Details />} />
+        <Route path={`/Details/:id`} element={<Details />} />
       </Routes>
     </div>
   );

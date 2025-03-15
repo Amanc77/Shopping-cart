@@ -1,8 +1,11 @@
 import React from "react";
+import { useContext } from "react";
+import { productsContext } from "../Utils/Context";
 
 function Nav() {
+  const [products] = useContext(productsContext);
   return (
-    <nav className="h-screen w-[20%] bg-white shadow-md p-4">
+    <nav className="h-full w-[20%] bg-white shadow-md p-4">
       <button className="w-full bg-blue-100 text-blue-600 py-2 px-4 rounded-md border border-blue-300 mb-4">
         Add New Product
       </button>
