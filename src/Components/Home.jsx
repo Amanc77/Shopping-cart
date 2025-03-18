@@ -1,19 +1,46 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { useContext, useState, useEffect } from "react";
+import axios from "axios";
 import Nav from "../Components/Nav";
 import { productsContext } from "../Utils/Context";
 import Loading from "../Components/Loading";
 
 function Home() {
   const [products] = useContext(productsContext);
+  const { search } = useLocation();
+  const category = new URLSearchParams(search).get("category");
+  //console.log("Selected Category:", category);
 
-  return products ? (
+  const [filteredProducts, setFilteredProducts] = useState(products);
+
+  const getProductCategory = async () => {
+    try {
+      const { data } = await axios.get(
+        `https://fakestoreapi.com/products/category/${category}`
+      );
+      // console.log("Fetched Category Data:", data);
+      setFilteredProducts(data);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (category) {
+      getProductCategory();
+    } else {
+      setFilteredProducts(products);
+    }
+  }, [category, products]);
+
+  //console.log("Filtered Products:", filteredProducts);
+
+  return filteredProducts ? (
     <>
       <Nav />
       <div className="w-[90%] mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 p-4">
         {/* Product Card */}
-        {products.map((p, i) => (
+        {filteredProducts.map((p, i) => (
           <Link
             to={`details/${p.id}`}
             key={i}
