@@ -23,8 +23,8 @@ const Details = () => {
   }, [id]);
 
   return product ? (
-    <div className="flex h-screen items-center justify-center bg-gray-100">
-      <div className="content w-[60%] flex items-center bg-white shadow-lg rounded-lg p-8">
+    <div className="flex h-screen items-center justify-center bg-gray-500">
+      <div className="content w-[60%] flex items-center  bg-gray-400 shadow-lg rounded-lg p-8">
         {/* Product Image */}
         <img
           src={product.image}

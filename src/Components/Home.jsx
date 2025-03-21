@@ -9,7 +9,6 @@ function Home() {
   const [products] = useContext(productsContext);
   const { search } = useLocation();
   const category = new URLSearchParams(search).get("category");
-  //console.log("Selected Category:", category);
 
   const [filteredProducts, setFilteredProducts] = useState(products);
 
@@ -18,7 +17,6 @@ function Home() {
       const { data } = await axios.get(
         `https://fakestoreapi.com/products/category/${category}`
       );
-      // console.log("Fetched Category Data:", data);
       setFilteredProducts(data);
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -33,18 +31,16 @@ function Home() {
     }
   }, [category, products]);
 
-  //console.log("Filtered Products:", filteredProducts);
-
   return filteredProducts ? (
     <>
-      <Nav />
-      <div className="w-[90%] mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 p-4">
+      <Nav className=" h-auto" />
+      <div className="w-[90%] mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-6 gap-y-8 p-4">
         {/* Product Card */}
         {filteredProducts.map((p, i) => (
           <Link
             to={`details/${p.id}`}
             key={i}
-            className="card bg-white p-3 border border-gray-300 shadow-md rounded-lg flex flex-col items-center transition-transform transform hover:scale-105 hover:shadow-lg"
+            className="bg-white p-3 border border-gray-300 shadow-lg rounded-lg flex flex-col items-center transition-transform transform hover:scale-105 hover:shadow-xl h-[265px] w-[220px]"
           >
             {/* Product Image */}
             <div
@@ -53,9 +49,14 @@ function Home() {
             ></div>
 
             {/* Product Title */}
-            <h1 className="mt-2 text-center text-gray-800 font-semibold text-sm truncate w-full">
+            <h1 className="mt-3 text-center text-gray-900 font-bold text-sm w-full line-clamp-2">
               {p.title}
             </h1>
+
+            {/* Product Description */}
+            <div className="mt-2 text-center text-gray-700 text-xs w-full line-clamp-2">
+              {p.description}
+            </div>
           </Link>
         ))}
       </div>
