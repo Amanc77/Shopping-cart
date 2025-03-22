@@ -35,13 +35,15 @@ function Create() {
       category,
     };
 
-    setProducts([...products, newProduct]);
-    console.log(newProduct);
+    const updatedProducts = [...products, newProduct];
 
-    submitAlert();
-  };
+    // Update state
+    setProducts(updatedProducts);
 
-  const submitAlert = () => {
+    // Store updated products in local storage
+    localStorage.setItem("products", JSON.stringify(updatedProducts));
+
+    console.log("Product Added:", newProduct);
     alert("Product added successfully!");
   };
 

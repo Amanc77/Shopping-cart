@@ -1,9 +1,9 @@
 import React from "react";
-
+import { Routes, Route, Link, useLocation } from "react-router-dom";
 import Home from "./Components/Home";
 import Details from "./Components/Details";
 import Create from "./Components/Create";
-import { Routes, Route, Link, useLocation } from "react-router-dom";
+import EditProduct from "./Components/EditProduct";
 
 function App() {
   const { search, pathname } = useLocation();
@@ -15,7 +15,7 @@ function App() {
     homeLink = (
       <Link
         to="/"
-        className=" text-teal-400 font-bold bg-gray-600 flex absolute left-[6.5%] top-[1%] p-2 rounded-md"
+        className=" text-teal-400 font-bold bg-gray-800 flex absolute left-[6.5%] top-[1%] p-2 rounded-md"
       >
         Home
       </Link>
@@ -29,6 +29,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/Create" element={<Create />} />
         <Route path="/details/:id" element={<Details />} />
+        <Route path="/edit/:id" element={<EditProduct />} />{" "}
       </Routes>
     </div>
   );
